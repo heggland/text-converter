@@ -2,6 +2,64 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
 
+import styled, { createGlobalStyle, css } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+html,
+body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+`;
+
+const Main = styled.main`
+  flex: 1 0 auto;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  }
+`;
+
+interface PropsTextarea {
+  readonly cursor?: string;
+}
+
+const Textarea = styled.textarea<PropsTextarea>`
+  width: 70vw;
+  height: 20vh;
+  resize: none;
+
+  ${({ cursor }) =>
+    cursor &&
+    css`
+      cursor: pointer;
+    `}
+`;
+
 const Home: NextPage = () => {
   const [text, setText] = useState([]);
   const [copied, setCopied] = useState(false);
@@ -38,38 +96,30 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div style={{ display: "flex", placeContent: "center" }}>
-      <div style={{ display: "inline-grid", placeItems: "center" }}>
-        <Head>
-          <title>SaRcAsM TyPeR</title>
-          <meta
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
+    <Main>
+      <GlobalStyle />
+      <Head>
+        <title>SaRcAsM TyPeR</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <Container>
+        <Section>
+          <h1>SaRcAsM TyPeR </h1>
+          <p>TyPe hErE: </p>
+          <Textarea onKeyUp={handleKeyUp} />
+          <br /> <br />
+          <p>OuTpUt hErE: </p>
+          <Textarea
+            readOnly={true}
+            value={text}
+            cursor="pointer"
+            onClick={handleCopy}
+            title="Click me to copy"
           />
-        </Head>
-        <h1>SaRcAsM TyPeR </h1>
-        <p>TyPe hErE: </p>
-        <textarea
-          onKeyUp={handleKeyUp}
-          style={{ width: "70vw", height: "20vh", resize: "none" }}
-        ></textarea>
-        <br /> <br />
-        <p>OuTpUt hErE: </p>
-        <textarea
-          readOnly={true}
-          value={text}
-          style={{
-            width: "70vw",
-            height: "20vh",
-            resize: "none",
-            cursor: "pointer",
-          }}
-          onClick={handleCopy}
-          title="Click me to copy"
-        />
-        {copied && <p>Copied!</p>}
-      </div>
-    </div>
+          {copied && <p>Copied!</p>}
+        </Section>
+      </Container>
+    </Main>
   );
 };
 
