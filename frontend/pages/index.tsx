@@ -62,6 +62,8 @@ const Textarea = styled.textarea<PropsTextarea>`
   width: 70vw;
   height: 20vh;
   resize: none;
+  z-index: 2;
+  background: transparent;
 
   ${({ cursor }) =>
     cursor &&
@@ -79,6 +81,7 @@ const Info = styled.p`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 3;
 `;
 
 const InfoText = styled.span`
@@ -104,12 +107,16 @@ const InfoNote = styled.span`
   transform: translate(-50%, -50%);
   color: grey;
   opacity: 0.5;
+  user-select: none;
+  cursor: pointer;
+  z-index: 1;
 `;
 
 const Home: NextPage = () => {
   const [text, setText] = useState([]);
   const [copied, setCopied] = useState(false);
   const [started, setStarted] = useState(false);
+  const [infoNoteText, setInfoNoteText] = useState("Click me to copy");
 
   const handleKeyUp = (e: any) => {
     const value = e.target.value;
@@ -139,12 +146,17 @@ const Home: NextPage = () => {
     if (text.length < 5) {
       setStarted(false);
     }
+
+    if (infoNoteText === "Copied!") {
+      setInfoNoteText("Click me to copy");
+    }
   };
 
   const handleCopy = () => {
     try {
       navigator.clipboard.writeText(text.toString());
-      setStarted(false);
+      //setStarted(false);
+      setInfoNoteText("Copied!");
     } catch (error) {
       console.log(error);
     }
@@ -177,7 +189,7 @@ const Home: NextPage = () => {
             onClick={handleCopy}
             title="Click me to copy"
           />
-          {started && <InfoNote>Click me to copy</InfoNote>}
+          {started && <InfoNote>{infoNoteText}</InfoNote>}
           {copied && (
             <Info>
               <InfoText>CoPiEd!</InfoText>
