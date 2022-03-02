@@ -153,6 +153,11 @@ const Home: NextPage = () => {
   };
 
   const handleCopy = () => {
+
+if (text.length < 5) {
+      return;
+    }
+
     try {
       navigator.clipboard.writeText(text.toString());
       //setStarted(false);
