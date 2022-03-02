@@ -90,6 +90,7 @@ const InfoText = styled.span`
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 5em;
+  user-select: none;
 `;
 
 const InfoNote = styled.span`
