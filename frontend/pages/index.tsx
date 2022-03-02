@@ -4,6 +4,7 @@ import { useState } from "react";
 
 const Home: NextPage = () => {
   const [text, setText] = useState([]);
+  const [copied, setCopied] = useState(false);
 
   const handleKeyUp = (e: any) => {
     const value = e.target.value;
@@ -28,6 +29,14 @@ const Home: NextPage = () => {
     }
   };
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(text.toString());
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  };
+
   return (
     <div style={{ display: "inline-grid" }}>
       <Head>
@@ -35,11 +44,25 @@ const Home: NextPage = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <h1>SaRcAsM TyPeR </h1>
-      <span>TyPe hErE: </span>
-      <textarea onKeyUp={handleKeyUp}></textarea>
+      <p>TyPe hErE: </p>
+      <textarea
+        onKeyUp={handleKeyUp}
+        style={{ width: "70vw", height: "20vh", resize: "none" }}
+      ></textarea>
       <br /> <br />
-      <span>OuTpUt hErE: </span>
-      <textarea readOnly={true} value={text} />
+      <p>OuTpUt hErE: </p>
+      <textarea
+        readOnly={true}
+        value={text}
+        style={{
+          width: "70vw",
+          height: "20vh",
+          resize: "none",
+          cursor: "pointer",
+        }}
+        onClick={handleCopy}
+      />
+      {copied && <p>Copied!</p>}
     </div>
   );
 };
