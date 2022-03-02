@@ -34,7 +34,11 @@ const Home: NextPage = () => {
         <title>SaRcAsM TyPeR</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
+      <h1>SaRcAsM TyPeR </h1>
+      <span>TyPe hErE: </span>
       <textarea onKeyUp={handleKeyUp}></textarea>
+      <br /> <br />
+      <span>OuTpUt hErE: </span>
       <textarea readOnly={true} value={text} />
     </div>
   );
