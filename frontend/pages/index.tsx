@@ -39,32 +39,37 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div style={{ display: "inline-grid" }}>
-      <Head>
-        <title>SaRcAsM TyPeR</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
-      <h1>SaRcAsM TyPeR </h1>
-      <p>TyPe hErE: </p>
-      <textarea
-        onKeyUp={handleKeyUp}
-        style={{ width: "70vw", height: "20vh", resize: "none" }}
-      ></textarea>
-      <br /> <br />
-      <p>OuTpUt hErE: </p>
-      <textarea
-        readOnly={true}
-        value={text}
-        style={{
-          width: "70vw",
-          height: "20vh",
-          resize: "none",
-          cursor: "pointer",
-        }}
-        onClick={handleCopy}
-        title="Click me to copy"
-      />
-      {copied && <p>Copied!</p>}
+    <div style={{ display: "flex", placeContent: "center" }}>
+      <div style={{ display: "inline-grid", placeItems: "center" }}>
+        <Head>
+          <title>SaRcAsM TyPeR</title>
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+          />
+        </Head>
+        <h1>SaRcAsM TyPeR </h1>
+        <p>TyPe hErE: </p>
+        <textarea
+          onKeyUp={handleKeyUp}
+          style={{ width: "70vw", height: "20vh", resize: "none" }}
+        ></textarea>
+        <br /> <br />
+        <p>OuTpUt hErE: </p>
+        <textarea
+          readOnly={true}
+          value={text}
+          style={{
+            width: "70vw",
+            height: "20vh",
+            resize: "none",
+            cursor: "pointer",
+          }}
+          onClick={handleCopy}
+          title="Click me to copy"
+        />
+        {copied && <p>Copied!</p>}
+      </div>
     </div>
   );
 };
