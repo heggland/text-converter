@@ -81,12 +81,6 @@ const Info = styled.p`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
-  // media
-  @media (max-width: 768px) {
-    width: 100vw;
-    height: 100vh;
-  }
 `;
 
 const InfoText = styled.span`
@@ -100,9 +94,23 @@ const InfoText = styled.span`
   font-size: 5em;
 `;
 
+const InfoNote = styled.span`
+  font-size: 0.8em;
+  // position center
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  bottom: 9vh;
+  transform: translate(-50%, -50%);
+  color: grey;
+  opacity: 0.5;
+`;
+
 const Home: NextPage = () => {
   const [text, setText] = useState([]);
   const [copied, setCopied] = useState(false);
+  const [started, setStarted] = useState(false);
 
   const handleKeyUp = (e: any) => {
     const value = e.target.value;
@@ -125,11 +133,19 @@ const Home: NextPage = () => {
         console.log(error);
       }
     }
+
+    if (!started && text.length > 5) {
+      setStarted(true);
+    }
+    if (text.length < 5) {
+      setStarted(false);
+    }
   };
 
   const handleCopy = () => {
     try {
       navigator.clipboard.writeText(text.toString());
+      setStarted(false);
     } catch (error) {
       console.log(error);
     }
@@ -151,10 +167,10 @@ const Home: NextPage = () => {
       <Container>
         <Heading>SaRcAsM TyPeR </Heading>
         <Section>
-          <p>Type here: </p>
-          <Textarea onKeyUp={handleKeyUp} />
+          <p>Type here </p>
+          <Textarea onKeyUp={handleKeyUp} autoFocus={true} />
           <br /> <br />
-          <p>Converted text: </p>
+          <p>Converted text </p>
           <Textarea
             readOnly={true}
             value={text}
@@ -162,6 +178,7 @@ const Home: NextPage = () => {
             onClick={handleCopy}
             title="Click me to copy"
           />
+          {started && <InfoNote>Click me to copy</InfoNote>}
           {copied && (
             <Info>
               <InfoText>CoPiEd!</InfoText>
