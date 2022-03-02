@@ -126,9 +126,10 @@ const Home: NextPage = () => {
   const handleCopy = () => {
     navigator.clipboard.writeText(text.toString());
     setCopied(true);
+
     setTimeout(() => {
       setCopied(false);
-    }, 2000);
+    }, 1000);
   };
 
   return (
