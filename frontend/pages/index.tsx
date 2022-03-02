@@ -33,6 +33,16 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
+const Heading = styled.h1`
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+`;
+
 const Section = styled.section`
   display: flex;
   flex-direction: column;
@@ -58,6 +68,32 @@ const Textarea = styled.textarea<PropsTextarea>`
     css`
       cursor: pointer;
     `}
+`;
+
+const Info = styled.p`
+  padding: 0.5rem;
+  width: 50%;
+  height: 50%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const InfoText = styled.span`
+  font-weight: bold;
+  // center text
+  display: flex;
+  justify-content: center;
+  // position center
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
 `;
 
 const Home: NextPage = () => {
@@ -103,12 +139,12 @@ const Home: NextPage = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Container>
+        <Heading>SaRcAsM TyPeR </Heading>
         <Section>
-          <h1>SaRcAsM TyPeR </h1>
-          <p>TyPe hErE: </p>
+          <p>Type here: </p>
           <Textarea onKeyUp={handleKeyUp} />
           <br /> <br />
-          <p>OuTpUt hErE: </p>
+          <p>Converted text: </p>
           <Textarea
             readOnly={true}
             value={text}
@@ -116,7 +152,11 @@ const Home: NextPage = () => {
             onClick={handleCopy}
             title="Click me to copy"
           />
-          {copied && <p>Copied!</p>}
+          {copied && (
+            <Info>
+              <InfoText>CoPiEd!</InfoText>
+            </Info>
+          )}
         </Section>
       </Container>
     </Main>
