@@ -72,8 +72,8 @@ const Textarea = styled.textarea<PropsTextarea>`
 
 const Info = styled.p`
   padding: 0.5rem;
-  width: 50%;
-  height: 50%;
+  width: 100vw;
+  height: 100vh;
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.5);
@@ -81,19 +81,23 @@ const Info = styled.p`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  // media
+  @media (max-width: 768px) {
+    width: 100vw;
+    height: 100vh;
+  }
 `;
 
 const InfoText = styled.span`
   font-weight: bold;
-  // center text
   display: flex;
   justify-content: center;
-  // position center
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 5rem;
+  font-size: 5em;
 `;
 
 const Home: NextPage = () => {
@@ -124,7 +128,12 @@ const Home: NextPage = () => {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(text.toString());
+    try {
+      navigator.clipboard.writeText(text.toString());
+    } catch (error) {
+      console.log(error);
+    }
+
     setCopied(true);
 
     setTimeout(() => {
