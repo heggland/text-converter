@@ -116,7 +116,6 @@ const InfoText = styled.span`
 
 const InfoNote = styled.span`
   font-size: 0.8em;
-  // position center
   display: flex;
   justify-content: center;
   position: absolute;
