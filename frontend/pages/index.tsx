@@ -127,22 +127,81 @@ const InfoNote = styled.span`
 `;
 
 const Home: NextPage = () => {
-  const [text, setText] = useState([]);
-  const [copied, setCopied] = useState(false);
-  const [started, setStarted] = useState(false);
-  const [infoNoteText, setInfoNoteText] = useState("Click me to copy");
+  const [text, setText] = useState<any>([]);
+  const [copied, setCopied] = useState<boolean>(false);
+  const [started, setStarted] = useState<boolean>(false);
+  const [infoNoteText, setInfoNoteText] = useState<string>("Click me to copy");
 
-  const [converter, setConverter] = useState("alternative");
-  const [pageTitle, setPageTitle] = useState("SaRcAsM TyPeR");
+  const [converter, setConverter] = useState<string>("alternative");
+  const [pageTitle, setPageTitle] = useState<string>("SaRcAsM TyPeR");
+  const [copyNote, setCopyNote] = useState<string>("CoPiEd!");
 
-  const handleKeyUp = (e: any) => {
-    const value = e.target.value;
+  const [scrollPosition, setScrollPosition] = useState(0);
 
+  // input field onKeyUp
+  const handleKeyUpInputArea = (e: any) => {
+    doConversion(e.target.value);
+    // queryselector hack..
+    const output = document.querySelector("#output-textarea");
+    if (output) output.scrollTop = scrollPosition;
+  };
+
+  const handleClickInputArea = (e: any) => doConversion(e.target.value);
+
+  // select onChange
+  const changeConverter = (e: any) => {
+    setConverter(e.target.value);
+
+    setText([]);
+
+    switch (e.target.value) {
+      case "alternative":
+        setPageTitle("SaRcAsM TyPeR");
+        setCopyNote("CoPiEd!");
+        break;
+      case "reversed":
+        setPageTitle("repyT msacraS");
+        setCopyNote("!deipoC");
+        break;
+      default:
+        setPageTitle("SaRcAsM TyPeR");
+        setCopyNote("CoPiEd!");
+    }
+  };
+
+  // copy to clipboard
+  const handleCopy = () => {
+    if (text.length < 5) {
+      return;
+    }
+
+    try {
+      navigator.clipboard.writeText(text.toString());
+      //setStarted(false);
+      setInfoNoteText("Copied!");
+    } catch (error) {
+      console.log(error);
+    }
+
+    setCopied(true);
+
+    setTimeout(() => {
+      setCopied(false);
+    }, 1000);
+  };
+
+  const getScrollPosition = (e: any) => {
+    console.log(e.target.scrollTop);
+    setScrollPosition(e.target.scrollTop);
+  };
+
+  // do the conversion app
+  const doConversion = (value: any) => {
     if (value.length === 0) setText([]);
 
-    let text = value.toString();
+    const textString: any = value.toString();
 
-    const charObj = text.split("");
+    const charObj: any = textString.split("");
 
     switch (converter) {
       case "alternative":
@@ -163,7 +222,7 @@ const Home: NextPage = () => {
       case "reversed":
         setPageTitle("repyT msacraS");
         try {
-          setText(text.split("").reverse().join(""));
+          setText(textString.split("").reverse().join(""));
         } catch (error) {
           console.log(error);
         }
@@ -185,40 +244,6 @@ const Home: NextPage = () => {
     }
   };
 
-  const handleCopy = () => {
-    if (text.length < 5) {
-      return;
-    }
-
-    try {
-      navigator.clipboard.writeText(text.toString());
-      //setStarted(false);
-      setInfoNoteText("Copied!");
-    } catch (error) {
-      console.log(error);
-    }
-
-    setCopied(true);
-
-    setTimeout(() => {
-      setCopied(false);
-    }, 1000);
-  };
-
-  const changeConverter = (e: any) => {
-    setConverter(e.target.value);
-    switch (e.target.value) {
-      case "alternative":
-        setPageTitle("SaRcAsM TyPeR");
-        break;
-      case "reversed":
-        setPageTitle("repyT msacraS");
-        break;
-      default:
-        setPageTitle("SaRcAsM TyPeR");
-    }
-  };
-
   return (
     <Main>
       <GlobalStyle />
@@ -232,13 +257,19 @@ const Home: NextPage = () => {
           <option value="alternative" defaultChecked>
             AlTeRnAtInG CaSe
           </option>
-          <option value="reversed">Reversed</option>
+          <option value="reversed">Reversed Case</option>
         </Select>
         <Section>
-          <Textarea onKeyUp={handleKeyUp} autoFocus={true} />
+          <Textarea
+            onKeyUp={handleKeyUpInputArea}
+            onClick={handleClickInputArea}
+            onScroll={getScrollPosition}
+            autoFocus={true}
+          />
           <br /> <br />
           <p>Converted text </p>
           <Textarea
+            id="output-textarea"
             readOnly={true}
             value={text}
             cursor="pointer"
@@ -248,7 +279,7 @@ const Home: NextPage = () => {
           {started && <InfoNote>{infoNoteText}</InfoNote>}
           {copied && (
             <Info>
-              <InfoText>CoPiEd!</InfoText>
+              <InfoText>{copyNote}</InfoText>
             </Info>
           )}
         </Section>
