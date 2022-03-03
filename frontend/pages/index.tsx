@@ -168,6 +168,14 @@ const Home: NextPage = () => {
         setPageTitle("SaRcAsM TyPeR");
         setCopyNote("CoPiEd!");
     }
+
+    const output = document.querySelector<HTMLInputElement>("#input-textarea");
+    if (output) {
+      setTimeout(() => {
+        output.click();
+        output.focus();
+      }, 0);
+    }
   };
 
   // copy to clipboard
@@ -225,7 +233,6 @@ const Home: NextPage = () => {
         } catch (error) {
           console.log(error);
         }
-
         break;
       default:
         break;
@@ -260,6 +267,7 @@ const Home: NextPage = () => {
         </Select>
         <Section>
           <Textarea
+            id="input-textarea"
             onKeyUp={handleKeyUpInputArea}
             onClick={handleClickInputArea}
             onScroll={getScrollPosition}
