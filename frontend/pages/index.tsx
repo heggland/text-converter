@@ -133,6 +133,7 @@ const Home: NextPage = () => {
   const [infoNoteText, setInfoNoteText] = useState("Click me to copy");
 
   const [converter, setConverter] = useState("alternative");
+  const [pageTitle, setPageTitle] = useState("SaRcAsM TyPeR");
 
   const handleKeyUp = (e: any) => {
     const value = e.target.value;
@@ -145,6 +146,7 @@ const Home: NextPage = () => {
 
     switch (converter) {
       case "alternative":
+        setPageTitle("SaRcAsM TyPeR");
         try {
           for (let i = 0; i < charObj.length; i++) {
             if (i % 2 === 1) {
@@ -159,6 +161,7 @@ const Home: NextPage = () => {
         }
         break;
       case "reversed":
+        setPageTitle("repyT msacraS");
         try {
           setText(text.split("").reverse().join(""));
         } catch (error) {
@@ -183,8 +186,7 @@ const Home: NextPage = () => {
   };
 
   const handleCopy = () => {
-
-if (text.length < 5) {
+    if (text.length < 5) {
       return;
     }
 
@@ -204,8 +206,17 @@ if (text.length < 5) {
   };
 
   const changeConverter = (e: any) => {
-    console.log(e.target.value);
     setConverter(e.target.value);
+    switch (e.target.value) {
+      case "alternative":
+        setPageTitle("SaRcAsM TyPeR");
+        break;
+      case "reversed":
+        setPageTitle("repyT msacraS");
+        break;
+      default:
+        setPageTitle("SaRcAsM TyPeR");
+    }
   };
 
   return (
@@ -216,7 +227,7 @@ if (text.length < 5) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Container>
-        <Heading>SaRcAsM TyPeR</Heading>
+        <Heading>{pageTitle}</Heading>
         <Select name="convert" onChange={changeConverter}>
           <option value="alternative" defaultChecked>
             AlTeRnAtInG CaSe
