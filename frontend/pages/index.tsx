@@ -2,27 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
 
-import styled, { createGlobalStyle, css } from "styled-components";
-
-const GlobalStyle = createGlobalStyle`
-html,
-body {
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-#__next {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-}
-
-`;
+import styled, { css } from "styled-components";
 
 const Main = styled.main`
   flex: 1 0 auto;
@@ -268,7 +248,6 @@ const Home: NextPage = () => {
 
   return (
     <Main>
-      <GlobalStyle />
       <Head>
         <title>SaRcAsM TyPeR</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />

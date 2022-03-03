@@ -35,9 +35,8 @@ const Heading = styled.div`
   ${({ values }) =>
       values.hasOwnProperty("userSelect") &&
       css`
-    user-select: ${values.userSelect};
-    } 
-  `}
+        user-select: ${values.userSelect};
+      `}
   }
 `;
 
