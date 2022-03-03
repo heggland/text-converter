@@ -234,6 +234,13 @@ const Home: NextPage = () => {
           console.log(error);
         }
         break;
+      case "lower":
+        setPageTitle("Sarcasm Typer");
+        try {
+          setText(textString.toLowerCase());
+        } catch (error) {
+          console.log(error);
+        }
       default:
         break;
     }
@@ -264,6 +271,7 @@ const Home: NextPage = () => {
             AlTeRnAtInG CaSe
           </option>
           <option value="reversed">Reversed Case</option>
+          <option value="lower">Lower Case</option>
         </Select>
         <Section>
           <Textarea
