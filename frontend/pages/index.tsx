@@ -146,6 +146,7 @@ const Home: NextPage = () => {
     if (output) output.scrollTop = scrollPosition;
   };
 
+  // input field onClick re-start
   const handleClickInputArea = (e: any) => doConversion(e.target.value);
 
   // select onChange
@@ -190,10 +191,8 @@ const Home: NextPage = () => {
     }, 1000);
   };
 
-  const getScrollPosition = (e: any) => {
-    console.log(e.target.scrollTop);
-    setScrollPosition(e.target.scrollTop);
-  };
+  // get scroll position of input area, apply to output in handleKeyUpInputArea function
+  const getScrollPosition = (e: any) => setScrollPosition(e.target.scrollTop);
 
   // do the conversion app
   const doConversion = (value: any) => {
