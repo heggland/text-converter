@@ -54,7 +54,11 @@ const Select = styled.select`
   text-align: center;
   display: flex;
   place-self: center;
-  margin-top: 10%;
+  margin-top: 25%;
+
+  @media (min-width: 600px) {
+    margin-top: 10%;
+  }
 `;
 
 const Section = styled.section`
