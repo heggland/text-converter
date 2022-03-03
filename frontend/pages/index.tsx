@@ -74,6 +74,7 @@ const Section = styled.section`
 
 interface PropsTextarea {
   readonly cursor?: string;
+  readonly margin?: string;
 }
 
 const Textarea = styled.textarea<PropsTextarea>`
@@ -87,6 +88,11 @@ const Textarea = styled.textarea<PropsTextarea>`
     cursor &&
     css`
       cursor: pointer;
+    `}
+  ${({ margin }) =>
+    margin &&
+    css`
+      margin: ${margin};
     `}
 `;
 
@@ -283,9 +289,9 @@ const Home: NextPage = () => {
             onClick={handleClickInputArea}
             onScroll={getScrollPosition}
             autoFocus={true}
+            placeholder="Type here .."
+            margin="0 0 25px"
           />
-          <br /> <br />
-          <p>Converted text </p>
           <Textarea
             id="output-textarea"
             readOnly={true}
@@ -293,6 +299,7 @@ const Home: NextPage = () => {
             cursor="pointer"
             onClick={handleCopy}
             title="Click me to copy"
+            placeholder="Converted text appear here .."
           />
           {started && <InfoNote>{infoNoteText}</InfoNote>}
           {copied && (
