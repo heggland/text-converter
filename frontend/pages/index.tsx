@@ -38,9 +38,23 @@ const Heading = styled.h1`
   font-weight: bold;
   margin: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
   padding: 0.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+`;
+
+const Select = styled.select`
+  font-weight: bold;
+  margin: 0;
+  padding: 0.5rem;
+  width: 200px;
+  text-align: center;
+  display: flex;
+  place-self: center;
+  margin-top: 10%;
 `;
 
 const Section = styled.section`
@@ -118,6 +132,8 @@ const Home: NextPage = () => {
   const [started, setStarted] = useState(false);
   const [infoNoteText, setInfoNoteText] = useState("Click me to copy");
 
+  const [converter, setConverter] = useState("alternative");
+
   const handleKeyUp = (e: any) => {
     const value = e.target.value;
 
@@ -127,17 +143,31 @@ const Home: NextPage = () => {
 
     const charObj = text.split("");
 
-    for (let i = 0; i < charObj.length; i++) {
-      try {
-        if (i % 2 === 1) {
-          charObj[i] = charObj[i].toLowerCase();
-        } else {
-          charObj[i] = charObj[i].toUpperCase();
+    switch (converter) {
+      case "alternative":
+        try {
+          for (let i = 0; i < charObj.length; i++) {
+            if (i % 2 === 1) {
+              charObj[i] = charObj[i].toLowerCase();
+            } else {
+              charObj[i] = charObj[i].toUpperCase();
+            }
+            setText(charObj.join(""));
+          }
+        } catch (error) {
+          console.log(error);
         }
-        setText(charObj.join(""));
-      } catch (error) {
-        console.log(error);
-      }
+        break;
+      case "reversed":
+        try {
+          setText(text.split("").reverse().join(""));
+        } catch (error) {
+          console.log(error);
+        }
+
+        break;
+      default:
+        break;
     }
 
     if (!started && text.length > 5) {
@@ -173,6 +203,11 @@ if (text.length < 5) {
     }, 1000);
   };
 
+  const changeConverter = (e: any) => {
+    console.log(e.target.value);
+    setConverter(e.target.value);
+  };
+
   return (
     <Main>
       <GlobalStyle />
@@ -181,9 +216,14 @@ if (text.length < 5) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Container>
-        <Heading>SaRcAsM TyPeR </Heading>
+        <Heading>SaRcAsM TyPeR</Heading>
+        <Select name="convert" onChange={changeConverter}>
+          <option value="alternative" defaultChecked>
+            AlTeRnAtInG CaSe
+          </option>
+          <option value="reversed">Reversed</option>
+        </Select>
         <Section>
-          <p>Type here </p>
           <Textarea onKeyUp={handleKeyUp} autoFocus={true} />
           <br /> <br />
           <p>Converted text </p>
