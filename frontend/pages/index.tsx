@@ -250,6 +250,48 @@ const Home: NextPage = () => {
         } catch (error) {
           console.log(error);
         }
+      case "upper":
+        setPageTitle("Sarcasm Typer");
+        try {
+          setText(textString.toUpperCase());
+        } catch (error) {
+          console.log(error);
+        }
+        break;
+      case "code":
+        setPageTitle("Sarcasm Typer");
+        for (let i = 0; i < charObj.length; i++) {
+          if (i % 2 === 1) {
+            // charObj[i] increase by 1
+            charObj[i] = String.fromCharCode(
+              charObj[i].charCodeAt(0) + 1
+            );
+          } else {
+            // charObj[i] decrease by 1
+            charObj[i] = String.fromCharCode(
+              charObj[i].charCodeAt(0) - 1
+            );
+          }
+          }
+          setText(charObj.join(""));
+        break;
+      case "decode":
+        setPageTitle("Sarcasm Typer");
+        for (let i = 0; i < charObj.length; i++) {
+          if (i % 2 === 1) {
+            // charObj[i] increase by 1
+            charObj[i] = String.fromCharCode(
+              charObj[i].charCodeAt(0) - 1
+            );
+          } else {
+            // charObj[i] decrease by 1
+            charObj[i] = String.fromCharCode(
+              charObj[i].charCodeAt(0) + 1
+            );
+          }
+        }
+        setText(charObj.join(""));
+        break;
       default:
         break;
     }
@@ -281,6 +323,9 @@ const Home: NextPage = () => {
           </option>
           <option value="reversed">Reversed Case</option>
           <option value="lower">Lower Case</option>
+          <option value="upper">Upper Case</option>
+          <option value="code">+1 char</option>
+          <option value="decode">-1 char</option>
         </Select>
         <Section>
           <Textarea
