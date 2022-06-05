@@ -145,6 +145,9 @@ const Home: NextPage = () => {
   const [pageTitle, setPageTitle] = useState<string>("SaRcAsM TyPeR");
   const [copyNote, setCopyNote] = useState<string>("CoPiEd!");
 
+
+  const [cesard, setCesard] = useState(1);
+
   const [scrollPosition, setScrollPosition] = useState(0);
 
   // input field onKeyUp
@@ -258,7 +261,7 @@ const Home: NextPage = () => {
           console.log(error);
         }
         break;
-      case "code":
+      case "caesarcode":
         setPageTitle("Sarcasm Typer");
         for (let i = 0; i < charObj.length; i++) {
           if (i % 2 === 1) {
@@ -275,7 +278,7 @@ const Home: NextPage = () => {
           }
           setText(charObj.join(""));
         break;
-      case "decode":
+      case "cesardecode":
         setPageTitle("Sarcasm Typer");
         for (let i = 0; i < charObj.length; i++) {
           if (i % 2 === 1) {
@@ -324,8 +327,8 @@ const Home: NextPage = () => {
           <option value="reversed">Reversed Case</option>
           <option value="lower">Lower Case</option>
           <option value="upper">Upper Case</option>
-          <option value="code">+1 char</option>
-          <option value="decode">-1 char</option>
+          <option value="caesarcode">Caesar Cipher +1 char</option>
+          <option value="cesardecode">Caesar Cipher -1 char</option>
         </Select>
         <Section>
           <Textarea
