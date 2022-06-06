@@ -327,8 +327,8 @@ const Home: NextPage = () => {
           <option value="reversed">Reversed Case</option>
           <option value="lower">Lower Case</option>
           <option value="upper">Upper Case</option>
-          <option value="caesarcode">Caesar Cipher +1 char</option>
-          <option value="cesardecode">Caesar Cipher -1 char</option>
+          <option value="caesarcode">Caesar Cipher -1 char</option>
+          <option value="cesardecode">Caesar Cipher +1 char</option>
         </Select>
         <Section>
           <Textarea
