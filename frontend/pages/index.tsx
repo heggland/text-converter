@@ -142,13 +142,16 @@ const Home: NextPage = () => {
   const [infoNoteText, setInfoNoteText] = useState<string>("Click me to copy");
 
   const [converter, setConverter] = useState<string>("alternative");
-  const [pageTitle, setPageTitle] = useState<string>("SaRcAsM TyPeR");
+  const [pageTitle, setPageTitle] = useState<string>("Text converter");
   const [copyNote, setCopyNote] = useState<string>("CoPiEd!");
 
-
-  const [cesard, setCesard] = useState(1);
+  const [caesard, setCaesard] = useState(1);
 
   const [scrollPosition, setScrollPosition] = useState(0);
+
+  const caesardQuantityOptions = Array.from(Array(10).keys()).map((i) => {
+    return i + 1;
+  });
 
   // input field onKeyUp
   const handleKeyUpInputArea = (e: any) => {
@@ -224,7 +227,7 @@ const Home: NextPage = () => {
 
     switch (converter) {
       case "alternative":
-        setPageTitle("SaRcAsM TyPeR");
+        setPageTitle("SaRcAsM tExT");
         try {
           for (let i = 0; i < charObj.length; i++) {
             if (i % 2 === 1) {
@@ -239,7 +242,7 @@ const Home: NextPage = () => {
         }
         break;
       case "reversed":
-        setPageTitle("repyT msacraS");
+        setPageTitle("Text reversed");
         try {
           setText(textString.split("").reverse().join(""));
         } catch (error) {
@@ -247,14 +250,14 @@ const Home: NextPage = () => {
         }
         break;
       case "lower":
-        setPageTitle("Sarcasm Typer");
+        setPageTitle("Convert to lower case");
         try {
           setText(textString.toLowerCase());
         } catch (error) {
           console.log(error);
         }
       case "upper":
-        setPageTitle("Sarcasm Typer");
+        setPageTitle("Convert to upper case");
         try {
           setText(textString.toUpperCase());
         } catch (error) {
@@ -262,7 +265,7 @@ const Home: NextPage = () => {
         }
         break;
       case "caesarcode":
-        setPageTitle("Sarcasm Typer");
+        setPageTitle("Caesar cipher +");
         for (let i = 0; i < charObj.length; i++) {
           if (i % 2 === 1) {
             // charObj[i] increase by 1
@@ -278,18 +281,18 @@ const Home: NextPage = () => {
           }
           setText(charObj.join(""));
         break;
-      case "cesardecode":
-        setPageTitle("Sarcasm Typer");
+      case "caesardecode":
+        setPageTitle("Caesar cipher -");
         for (let i = 0; i < charObj.length; i++) {
           if (i % 2 === 1) {
             // charObj[i] increase by 1
             charObj[i] = String.fromCharCode(
-              charObj[i].charCodeAt(0) - 1
+              charObj[i].charCodeAt(0) - caesard
             );
           } else {
             // charObj[i] decrease by 1
             charObj[i] = String.fromCharCode(
-              charObj[i].charCodeAt(0) + 1
+              charObj[i].charCodeAt(0) + caesard
             );
           }
         }
@@ -315,7 +318,7 @@ const Home: NextPage = () => {
     <Main>
       <GlobalStyle />
       <Head>
-        <title>SaRcAsM TyPeR</title>
+        <title>Text converter</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Container>
@@ -327,9 +330,20 @@ const Home: NextPage = () => {
           <option value="reversed">Reversed Case</option>
           <option value="lower">Lower Case</option>
           <option value="upper">Upper Case</option>
-          <option value="caesarcode">Caesar Cipher -1 char</option>
-          <option value="cesardecode">Caesar Cipher +1 char</option>
+          <option value="caesarcode">Caesar Cipher +1 char</option>
+          <option value="caesardecode">Caesar Cipher -1 char</option>
         </Select>
+        <select onChange={(e) => {
+          setCaesard(Number(e.target.value));
+        }}>
+          {caesardQuantityOptions.map((option) => {
+            return (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+            );
+          })}
+        </select>
         <Section>
           <Textarea
             id="input-textarea"
