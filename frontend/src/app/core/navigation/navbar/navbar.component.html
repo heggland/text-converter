@@ -1,0 +1,5 @@
+<nav>
+  <a *ngFor="let route of navLinks" [routerLink]="[route.path]">
+    {{ route.path === '' ? 'Home' : (route.path | titlecase) }}
+  </a>
+</nav>
