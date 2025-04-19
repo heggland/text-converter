@@ -1,1 +1,11 @@
-<p>convert works!</p>
+<app-select
+  [options]="converterTypes"
+  [(value)]="selectedConverter"
+  (valueChange)="onSelectConverterChange($event)"
+></app-select>
+
+
+<app-textarea [(value)]="originalValue" (valueChange)="onTextAreaChange($event)"></app-textarea>
+<app-textarea [(value)]="convertedValue" [readonly]="true" ></app-textarea>
+
+

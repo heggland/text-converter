@@ -1,3 +1,14 @@
+# commands
+
+ng generate component <folder/component>
+e.g. ng generate component shared/components/text 
+flags-
+-flat=false 
+--style=scss
+
+
+
+
 # Frontend
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.8.
