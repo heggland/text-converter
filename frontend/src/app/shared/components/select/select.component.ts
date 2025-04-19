@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NgForOf} from '@angular/common';
 
 @Component({
@@ -13,12 +13,9 @@ export class SelectComponent {
 
   @Input() options: readonly string[] = [];
   @Input() value: string = '';
-  @Output() valueChange = new EventEmitter<string>();
 
   onSelectChange(event: Event) {
-    const value = (event.target as HTMLSelectElement).value;
-    this.value = value;
-    this.valueChange.emit(value);
+    this.value = (event.target as HTMLSelectElement).value;
   }
 
 }
