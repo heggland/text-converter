@@ -1,1 +1,15 @@
-<textarea [value]="value" (input)="onInput($event)" [readOnly]="readonly"></textarea>
+<div class="textarea-container">
+  <textarea
+    [readonly]="readonly"
+    [value]="value"
+    (input)="onInput($event)"
+    [ngClass]="{
+      copy: allowCopy,
+      resizeNone: disableResize
+    }"
+  ></textarea>
+
+  <div *ngIf="copied" class="copied-popover">Copied!</div>
+</div>
+
+

@@ -1,0 +1,52 @@
+.page {
+  max-width: 700px;
+  margin: 4rem auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: stretch;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    span {
+      font-size: 0.8rem;
+      text-indent: 0.5rem;
+    }
+  }
+
+  .select {
+    select {
+      font-size: 1rem;
+    }
+  }
+
+  .textarea {
+    textarea {
+      min-height: 120px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+  }
+
+  span {
+    font-size: 0.8rem;
+    text-indent: 0.5rem;
+  }
+}

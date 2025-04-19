@@ -1,11 +1,40 @@
-<app-select
-  [options]="converterTypes"
-  [(value)]="selectedConverter"
-  (valueChange)="onSelectConverterChange($event)"
-></app-select>
+<div class="page">
 
+  <div class="header">
+    <div>
+      <h1>Text converter</h1>
+    </div>
 
-<app-textarea [(value)]="originalValue" (valueChange)="onTextAreaChange($event)"></app-textarea>
-<app-textarea [(value)]="convertedValue" [readonly]="true" ></app-textarea>
+    <div class="mode">
+      <app-select
+        class="select"
+        [options]="converterTypes"
+        [(value)]="selectedConverter"
+        (valueChange)="onSelectConverterChange($event)"
+        title="select a mode"
+      ></app-select>
+    </div>
+  </div>
 
+  <div>
+    <span>input:</span>
+    <app-textarea
+      class="textarea"
+      [(value)]="value"
+      (valueChange)="onTextAreaChange($event)"
+      [disableResize]=true
+    ></app-textarea>
+  </div>
 
+  <div>
+    <span>output:</span>
+    <app-textarea
+      class="textarea"
+      [(value)]="convertedValue"
+      [readonly]=true
+      [allowCopy]=true
+      [disableResize]=true
+    ></app-textarea>
+    <span>— click to copy</span>
+  </div>
+</div>

@@ -10,15 +10,37 @@ export const converterTypes = [
 export type ConverterType = (typeof converterTypes)[number];
 
 export class TextConverter {
-  static convert(text: string, type: ConverterType): string {
+
+  private type: ConverterType = converterTypes[0];
+
+  public setType(type: ConverterType) {
+    this.type = type;
+  }
+
+  public getType(): ConverterType {
+    return this.type;
+  }
+
+  public convert(text: string): string {
     const chars = text.split("");
 
-    switch (type) {
+    switch (this.type) {
       case "alternative":
+        let altIdx = 0;
+        const firstLetter = chars.find(c => /[a-zA-Z]/.test(c));
+        const startUpper = firstLetter ? firstLetter === firstLetter.toUpperCase() : true;
+
         return chars
-          .map((char, i) =>
-            i % 2 === 0 ? char.toUpperCase() : char.toLowerCase()
-          )
+          .map((char) => {
+            if (!/[a-zA-Z]/.test(char)) return char;
+
+            const result = (altIdx % 2 === 0) === startUpper
+              ? char.toUpperCase()
+              : char.toLowerCase();
+
+            altIdx++;
+            return result;
+          })
           .join("");
 
       case "reversed":

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {TextareaComponent} from '../../shared/components/textarea/textarea.component';
 import {SelectComponent} from '../../shared/components/select/select.component';
-import {converterTypes} from '../../utils/convert';
+import {ConverterType, converterTypes, TextConverter} from '../../utils/convert';
 
 @Component({
   selector: 'app-convert',
@@ -13,32 +13,26 @@ import {converterTypes} from '../../utils/convert';
   styleUrl: './convert.component.scss'
 })
 export class ConvertComponent {
+  TransformText = new TextConverter();
 
   converterTypes: readonly string[] = converterTypes;
-  selectedConverter: string = this.converterTypes[0];
+  selectedConverter: string = this.TransformText.getType();
 
-  originalValue: string = "";
-
-  data: string[] = [];
+  value: string = "";
+  valueArray: string[] = [];
   convertedValue: string = "";
 
   onSelectConverterChange(value: string) {
     this.selectedConverter = value;
+    this.TransformText.setType(value as ConverterType);
+    this.convertedValue = this.TransformText.convert(this.value);
   }
 
   onTextAreaChange(value: string) {
-
-    this.originalValue = value;
-
-    if (this.originalValue === this.convertedValue) {
-      return;
-    }
-
-    const lastChar = value.charAt(value.length - 1);
-
-    this.data.push(lastChar);
-
-    this.convertedValue = this.data.join(' ');
+    this.value = value;
+    if (this.value === this.convertedValue) return;
+    this.valueArray.push(value.charAt(value.length - 1));
+    this.convertedValue = this.TransformText.convert(this.value);
   }
 
 }
