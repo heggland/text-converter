@@ -35,8 +35,8 @@ This repository includes **two separate frontend implementations** of the same a
 ### Clone the repository
 
 ```bash
-git clone https://github.com/your-username/sarcasm-typer.git
-cd sarcasm-typer
+git clone https://github.com/heggland/text-converter
+cd text-converter
 ```
 
 ---
@@ -48,7 +48,8 @@ cd sarcasm-typer
 ```bash
 cd frontend-nextjs12
 npm install
-npm run dev
+npm run build
+npm run stat
 ```
 
 Open `http://localhost:3000` in your browser.
@@ -59,12 +60,11 @@ Open `http://localhost:3000` in your browser.
 
 ```bash
 cd frontend
+npm install -g @angular/cli
 npm install
-ng serve
+npm run build
+npm run serve:ssr:frontend
 ```
-
-Open `http://localhost:4200` in your browser.
-
 ---
 
 ## 🛠️ Tech Stack
@@ -87,7 +87,7 @@ Built with 💜 by [Kjetil Heggland](http://heggland.tech)
 [LinkedIn](https://www.linkedin.com/in/kjetil-heggland/)  
 Feel free to fork, contribute, or just enjoy the sarcasm.
 
-- thanks to chatgpt generating this READMe.md file :)
+- thanks to chatgpt generating 85% of this READMe.md file :)
 
 ---
 
