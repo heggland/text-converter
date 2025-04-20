@@ -3,8 +3,8 @@ export const converterTypes = [
   "reversed",
   "lower",
   "upper",
-  "caesarcode",
-  "cesardecode",
+  "caesarcode UTF-16",
+  "cesardecode UTF-16",
 ] as const;
 
 export type ConverterType = (typeof converterTypes)[number];
@@ -52,7 +52,7 @@ export class TextConverter {
       case "upper":
         return text.toUpperCase();
 
-      case "caesarcode":
+      case "caesarcode UTF-16":
         return chars
           .map((char, i) =>
             String.fromCharCode(
@@ -61,7 +61,7 @@ export class TextConverter {
           )
           .join("");
 
-      case "cesardecode":
+      case "cesardecode UTF-16":
         return chars
           .map((char, i) =>
             String.fromCharCode(
